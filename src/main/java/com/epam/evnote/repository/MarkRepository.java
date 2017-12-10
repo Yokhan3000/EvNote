@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MarkRepository extends JpaRepository<Mark, Long> {
-
+    Mark getByName(String name);
 }

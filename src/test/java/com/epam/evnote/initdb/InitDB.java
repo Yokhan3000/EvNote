@@ -1,6 +1,10 @@
-package com.epam.evnote.domain;
+package com.epam.evnote.initdb;
 
 import com.epam.evnote.config.ApplicationConfiguration;
+import com.epam.evnote.domain.Mark;
+import com.epam.evnote.domain.Note;
+import com.epam.evnote.domain.Notepad;
+import com.epam.evnote.domain.User;
 import com.epam.evnote.repository.MarkRepository;
 import com.epam.evnote.repository.NoteRepository;
 import com.epam.evnote.repository.NotepadRepository;
@@ -23,7 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @Service
-public class TestTest {
+public class InitDB {
 
   @Autowired
   UserRepository userRepository;

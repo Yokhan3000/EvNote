@@ -39,4 +39,8 @@ public class NoteService implements CommonService<Note, Long> {
   public void delete(Note note) {
     noteRepository.delete(note);
   }
+
+  public Note getByTitle(String title) {
+    return noteRepository.getByTitle(title);
+  }
 }

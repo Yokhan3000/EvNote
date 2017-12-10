@@ -1,6 +1,7 @@
 package com.epam.evnote.service.impl;
 
 import com.epam.evnote.domain.Notepad;
+import com.epam.evnote.domain.User;
 import com.epam.evnote.repository.NotepadRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
@@ -20,6 +21,13 @@ public class NotepadService implements CommonService<Notepad, Long> {
     this.notepadRepository = notepadRepository;
   }
 
+  public void createNotepad(String title, User user) {
+    Notepad notepad = new Notepad();
+    notepad.setTitle(title);
+    notepad.setUser(user);
+    saveOrUpdate(notepad);
+  }
+
   @Override
   public void saveOrUpdate(Notepad notepad) {
     notepadRepository.saveAndFlush(notepad);
@@ -36,7 +44,12 @@ public class NotepadService implements CommonService<Notepad, Long> {
   }
 
   @Override
-  public void delete(Notepad notepad){
+  public void delete(Notepad notepad) {
     notepadRepository.delete(notepad);
   }
+
+  public Notepad getByTitle(String title) {
+    return notepadRepository.getByTitle(title);
+  }
+
 }

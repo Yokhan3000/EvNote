@@ -1,6 +1,9 @@
 package com.epam.evnote.service.impl;
 
+import com.epam.evnote.domain.Note;
+import com.epam.evnote.domain.Notepad;
 import com.epam.evnote.domain.User;
+import com.epam.evnote.exceptions.UserExistException;
 import com.epam.evnote.repository.UserRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
@@ -18,6 +21,18 @@ public class UserService implements CommonService<User, Long> {
   @Autowired
   public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
+  }
+
+  public User createUser(String login, String password) {
+    User byLogin = userRepository.getByLogin(login);
+    if (byLogin != null) {
+      throw new UserExistException();
+    }
+    User user = new User();
+    user.setLogin(login);
+    user.setPassword(password);
+    User userFormDb = userRepository.saveAndFlush(user);
+    return userFormDb;
   }
 
   @Override
@@ -39,4 +54,5 @@ public class UserService implements CommonService<User, Long> {
   public void delete(User user) {
     userRepository.delete(user);
   }
+
 }

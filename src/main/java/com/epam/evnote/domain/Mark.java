@@ -28,15 +28,13 @@ public class Mark implements Serializable {
 
   private String name;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(
           name = "mark_id",
-          referencedColumnName = "id",
-          nullable = false),
+          referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(
           name = "note_id",
-          referencedColumnName = "id",
-          nullable = false))
+          referencedColumnName = "id"))
   private List<Note> notes = new ArrayList<>();
 }

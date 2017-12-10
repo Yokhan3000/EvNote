@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +29,7 @@ public class Note implements Serializable{
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Notepad.class)
+  @ManyToOne(fetch = FetchType.LAZY, targetEntity = Notepad.class)
   @JoinColumn(name = "notepad_id", nullable = false)
   private Notepad notepad;
 

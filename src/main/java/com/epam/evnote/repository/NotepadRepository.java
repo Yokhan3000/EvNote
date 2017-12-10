@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NotepadRepository extends JpaRepository<Notepad, Long> {
-
+    public Notepad getByTitle(String title);
 }

@@ -39,4 +39,8 @@ public class MarkService implements CommonService<Mark, Long> {
   public void delete(Mark mark) {
     markRepository.delete(mark);
   }
+
+  public Mark getByName(String name) {
+    return markRepository.getByName(name);
+  }
 }

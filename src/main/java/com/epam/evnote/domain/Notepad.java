@@ -27,7 +27,7 @@ public class Notepad implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
+  @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
   @JoinColumn(name = "user_id")
   private User user;
   private String title;
