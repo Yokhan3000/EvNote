@@ -1,32 +1,39 @@
 package com.epam.evnote.domain;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@NoArgsConstructor
 @Data
-@Entity(name = "Notepad")
-@Table(name = "notepads")
-public class Notepad {
+@Entity
+@Table
+public class Notepad implements Serializable {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
-  @JoinColumn(name = "user_id", nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+  @JoinColumn(name = "user_id")
   private User user;
+  private String title;
 
-  private LocalDateTime update;
+  private Timestamp updateTime;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "notepad")
-  private List<Note> notes;
+  @OneToMany(mappedBy = "notepad")
+  private List<Note> notes = new ArrayList<>();
 }
