@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity
 @Table
 @ToString(exclude = {"notepads"})
-public class User implements Serializable{
+public class User implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,9 +29,12 @@ public class User implements Serializable{
   private String login;
   private String password;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user",
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
       cascade = CascadeType.ALL)
   private List<Notepad> notepads = new ArrayList<>();
+
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Mark> marks = new ArrayList<>();
 }
 
 

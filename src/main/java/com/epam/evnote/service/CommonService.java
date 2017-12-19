@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CommonService<E, I> {
 
-  void saveOrUpdate(E e);
+
+  E saveOrUpdate(E e);
 
   E getById(I id);
 

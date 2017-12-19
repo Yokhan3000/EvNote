@@ -10,6 +10,7 @@ import com.epam.evnote.repository.UserRepository;
 import com.epam.evnote.service.impl.NotepadService;
 import com.epam.evnote.service.impl.UserService;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.java.Log;
@@ -53,7 +54,7 @@ public class NotepadServiceTest {
   @Test
   public void createNotepad() throws Exception {
     notepadService.createNotepad("Job", user);
-    Notepad job = notepadService.getByTitle("Job");
+    Notepad job = notepadService.getByTitle("Job", user);
     String login = job.getUser().getLogin();
     assertEquals(login, "TestForNotepad");
   }
@@ -64,7 +65,7 @@ public class NotepadServiceTest {
     notepad.setTitle("Home");
     notepad.setUser(user);
     notepadService.saveOrUpdate(notepad);
-    Notepad home = notepadService.getByTitle("Home");
+    Notepad home = notepadService.getByTitle("Home", user);
     assertNotNull(home);
   }
 
@@ -75,7 +76,7 @@ public class NotepadServiceTest {
     notepad.setTitle("Home");
     notepad.setUser(user);
     notepadService.saveOrUpdate(notepad);
-    Notepad home = notepadService.getByTitle("Home");
+    Notepad home = notepadService.getByTitle("Home",user);
     Notepad byId = notepadService.getById(home.getId());
     assertEquals(home.getTitle(), byId.getTitle());
   }
@@ -91,11 +92,11 @@ public class NotepadServiceTest {
   public void delete() throws Exception {
     Notepad notepad = new Notepad();
     notepad.setTitle("Home");
-    notepad.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+    notepad.setUpdateTime(LocalDate.now());
     notepad.setUser(user);
     notepadService.saveOrUpdate(notepad);
     notepadService.delete(notepad);
-    Notepad home = notepadService.getByTitle("Home");
+    Notepad home = notepadService.getByTitle("Home",user);
     assertNull(home);
   }
 

@@ -17,13 +17,14 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @NoArgsConstructor
 @Data
 @Entity
 @Table
-public class Note implements Serializable{
+public class Note implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,13 +39,11 @@ public class Note implements Serializable{
   private Timestamp creationTime;
   private Timestamp updateTime;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(
-          name = "note_id",
-          nullable = false),
+          name = "note_id", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(
-          name = "mark_id",
-          nullable = false))
+          name = "mark_id", referencedColumnName = "id"))
   private List<Mark> marks = new ArrayList<>();
 }

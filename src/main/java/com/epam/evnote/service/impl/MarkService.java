@@ -1,6 +1,7 @@
 package com.epam.evnote.service.impl;
 
 import com.epam.evnote.domain.Mark;
+import com.epam.evnote.domain.User;
 import com.epam.evnote.repository.MarkRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
@@ -21,8 +22,10 @@ public class MarkService implements CommonService<Mark, Long> {
   }
 
   @Override
-  public void saveOrUpdate(Mark mark) {
-    markRepository.saveAndFlush(mark);
+  public Mark saveOrUpdate(Mark mark) {
+
+    Mark saved = markRepository.saveAndFlush(mark);
+    return saved;
   }
 
   @Override
@@ -43,4 +46,9 @@ public class MarkService implements CommonService<Mark, Long> {
   public Mark getByName(String name) {
     return markRepository.getByName(name);
   }
+
+  public Mark getAllByUser(User user) {
+    return markRepository.getByUser(user);
+  }
+
 }
