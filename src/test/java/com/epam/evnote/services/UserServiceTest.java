@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import com.epam.evnote.config.ApplicationConfiguration;
 import com.epam.evnote.domain.User;
-import com.epam.evnote.exceptions.UserExistException;
+import com.epam.evnote.exceptions.UserException;
 import com.epam.evnote.repository.UserRepository;
 import com.epam.evnote.service.impl.UserService;
 import java.util.List;
@@ -37,7 +37,7 @@ public class UserServiceTest {
     User mike = userService.createUser("Mike", "321");
     assertNotNull(mike);
   }
-
+  @Transactional
   @Test
   public void saveOrUpdate() throws Exception {
     User dima = userService.createUser("Dima", "222");
@@ -72,7 +72,7 @@ public class UserServiceTest {
   }
 
 
-  @Test(expected = UserExistException.class)
+  @Test(expected = UserException.class)
   public void userCreateExistedTest() {
     userService.createUser("John", "111");
     userService.createUser("John", "222");

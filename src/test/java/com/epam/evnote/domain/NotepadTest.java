@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import com.epam.evnote.config.ApplicationConfiguration;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.extern.java.Log;
 import org.junit.Assert;
@@ -32,7 +33,7 @@ public class NotepadTest {
     test.setTitle("title");
     test.setUser(new User());
     test.setId(99L);
-    test.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+    test.setUpdateTime(LocalDate.now());
   }
 
   @Test

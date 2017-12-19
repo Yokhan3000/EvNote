@@ -29,8 +29,10 @@ public class NotepadService implements CommonService<Notepad, Long> {
   }
 
   @Override
-  public void saveOrUpdate(Notepad notepad) {
-    notepadRepository.saveAndFlush(notepad);
+  public Notepad saveOrUpdate(Notepad notepad) {
+
+    Notepad saved = notepadRepository.saveAndFlush(notepad);
+    return saved;
   }
 
   @Override
@@ -48,8 +50,12 @@ public class NotepadService implements CommonService<Notepad, Long> {
     notepadRepository.delete(notepad);
   }
 
-  public Notepad getByTitle(String title) {
-    return notepadRepository.getByTitle(title);
+  public Notepad getByTitle(String title, User user) {
+    return notepadRepository.getByTitleAndUser(title, user);
+  }
+
+  public List<Notepad> getAllByUser(User user) {
+    return notepadRepository.getAllByUser(user);
   }
 
 }

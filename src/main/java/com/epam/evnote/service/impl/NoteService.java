@@ -1,6 +1,9 @@
 package com.epam.evnote.service.impl;
 
+import com.epam.evnote.domain.Mark;
 import com.epam.evnote.domain.Note;
+import com.epam.evnote.domain.Notepad;
+import com.epam.evnote.repository.MarkRepository;
 import com.epam.evnote.repository.NoteRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
@@ -14,15 +17,19 @@ import org.springframework.stereotype.Service;
 public class NoteService implements CommonService<Note, Long> {
 
   NoteRepository noteRepository;
+  MarkRepository markRepository;
 
   @Autowired
-  public NoteService(NoteRepository noteRepository) {
+  public NoteService(NoteRepository noteRepository, MarkRepository markRepository) {
     this.noteRepository = noteRepository;
+    this.markRepository = markRepository;
   }
 
   @Override
-  public void saveOrUpdate(Note note) {
-    noteRepository.saveAndFlush(note);
+  public Note saveOrUpdate(Note note) {
+
+    Note saved = noteRepository.saveAndFlush(note);
+    return saved;
   }
 
   @Override
@@ -40,7 +47,14 @@ public class NoteService implements CommonService<Note, Long> {
     noteRepository.delete(note);
   }
 
-  public Note getByTitle(String title) {
-    return noteRepository.getByTitle(title);
+  public Note getByTitle(Notepad notepad, String title) {
+
+    return noteRepository.getByNotepadAndTitle(notepad, title);
+
+  }
+
+  public List<Note> getByMarkTitle(String markTitle) {
+    Mark mark = markRepository.getByName(markTitle);
+    return mark.getNotes();
   }
 }

@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @NoArgsConstructor
@@ -37,4 +39,8 @@ public class Mark implements Serializable {
           name = "note_id",
           referencedColumnName = "id"))
   private List<Note> notes = new ArrayList<>();
+
+  @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+  @JoinColumn(name = "user_id")
+  private User user;
 }

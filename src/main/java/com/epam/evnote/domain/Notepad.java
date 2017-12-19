@@ -2,6 +2,7 @@ package com.epam.evnote.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -15,12 +16,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @NoArgsConstructor
 @Data
 @Entity
 @Table
+@ToString(exclude = "notes")
 public class Notepad implements Serializable {
 
   @Id
@@ -32,8 +35,8 @@ public class Notepad implements Serializable {
   private User user;
   private String title;
 
-  private Timestamp updateTime;
+  private LocalDate updateTime;
 
-  @OneToMany(mappedBy = "notepad")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "notepad")
   private List<Note> notes = new ArrayList<>();
 }

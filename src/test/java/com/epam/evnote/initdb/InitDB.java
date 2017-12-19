@@ -50,7 +50,7 @@ public class InitDB {
 
     Notepad notepad = new Notepad();
     notepad.setTitle("MyNotepad");
-    notepad.setUpdateTime(Timestamp.valueOf(LocalDateTime.now()));
+    notepad.setUpdateTime(LocalDate.now());
     notepad.setUser(user);
     notepadRepository.saveAndFlush(notepad);
 
@@ -59,6 +59,7 @@ public class InitDB {
     note.setNotepad(notepad);
     note.setTitle("Work");
     noteRepository.saveAndFlush(note);
+
 
     Mark mark = new Mark();
     mark.setName("JobOnly");

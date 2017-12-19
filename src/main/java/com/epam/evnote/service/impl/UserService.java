@@ -1,9 +1,7 @@
 package com.epam.evnote.service.impl;
 
-import com.epam.evnote.domain.Note;
-import com.epam.evnote.domain.Notepad;
 import com.epam.evnote.domain.User;
-import com.epam.evnote.exceptions.UserExistException;
+import com.epam.evnote.exceptions.UserException;
 import com.epam.evnote.repository.UserRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
@@ -26,18 +24,25 @@ public class UserService implements CommonService<User, Long> {
   public User createUser(String login, String password) {
     User byLogin = userRepository.getByLogin(login);
     if (byLogin != null) {
-      throw new UserExistException();
+      throw new UserException("Login already exists!" + byLogin.getLogin());
     }
     User user = new User();
     user.setLogin(login);
     user.setPassword(password);
-    User userFormDb = userRepository.saveAndFlush(user);
-    return userFormDb;
+    User userFromDb = userRepository.saveAndFlush(user);
+    return userFromDb;
   }
 
   @Override
-  public void saveOrUpdate(User user) {
-    userRepository.saveAndFlush(user);
+  public User saveOrUpdate(User user) {
+    if(user.getId() != null) {
+      User byLogin = userRepository.getByLogin(user.getLogin());
+      if(!user.getId().equals(byLogin.getId())) {
+        throw new UserException("Login already exists!" + byLogin.getLogin());
+      }
+    }
+    User saved = userRepository.saveAndFlush(user);
+    return saved;
   }
 
   @Override
@@ -53,6 +58,10 @@ public class UserService implements CommonService<User, Long> {
   @Override
   public void delete(User user) {
     userRepository.delete(user);
+  }
+
+  public User getByLogin(String login) {
+    return userRepository.getByLogin(login);
   }
 
 }
