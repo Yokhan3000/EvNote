@@ -63,17 +63,18 @@ public class ApplicationConfiguration {
   public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
     return new JpaTransactionManager(emf);
   }
-//  @Bean
-//  public DataSourceInitializer dataSourceInitializer() throws Exception{
-//    DataSourceInitializer initializer = new DataSourceInitializer();
-//    initializer.setDataSource(dataSource());
-//
-//    ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-//    databasePopulator.setContinueOnError(true);
-//    databasePopulator.addScript(dataScript);
-//    initializer.setDatabasePopulator(databasePopulator);
-//    return initializer;
-//
-//  }
+
+  @Bean
+  public DataSourceInitializer dataSourceInitializer() throws Exception{
+    DataSourceInitializer initializer = new DataSourceInitializer();
+    initializer.setDataSource(dataSource());
+
+    ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
+    databasePopulator.setContinueOnError(true);
+    databasePopulator.addScript(dataScript);
+    initializer.setDatabasePopulator(databasePopulator);
+    return initializer;
+
+  }
 
 }
