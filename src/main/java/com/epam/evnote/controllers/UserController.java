@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +56,15 @@ public class UserController {
   @GetMapping("/users/{id}")
   public User findById(@PathVariable Long id) {
     return userService.getById(id);
+  }
+
+  @RequestMapping("/info")
+  public @ResponseBody String userInfo(Authentication authentication) {
+    String msg = "";
+    for (GrantedAuthority authority : authentication.getAuthorities()) {
+      String role = authority.getAuthority();
+      msg+=authentication.getName()+", You have "+ role;
+    }
+    return msg;
   }
 }
