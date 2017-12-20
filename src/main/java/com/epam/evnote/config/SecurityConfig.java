@@ -6,20 +6,25 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .withUser("user").password("user").roles("USER");
+        //auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/notepad/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/info/**").access("hasRole('ROLE_USER')")
                 //.antMatchers("/confidential/**").access("hasRole('ROLE_SUPERADMIN')")
                 .and().formLogin().defaultSuccessUrl("/", false);
     }
