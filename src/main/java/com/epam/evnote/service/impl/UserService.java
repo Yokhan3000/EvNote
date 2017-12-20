@@ -5,8 +5,11 @@ import com.epam.evnote.exceptions.UserException;
 import com.epam.evnote.repository.UserRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
+import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Mikhail Chtetsov on 10/12/2017.
@@ -16,9 +19,12 @@ public class UserService implements CommonService<User, Long> {
 
   UserRepository userRepository;
 
+  HttpSession httpSession;
+
   @Autowired
-  public UserService(UserRepository userRepository) {
+  public UserService(UserRepository userRepository, HttpSession httpSession) {
     this.userRepository = userRepository;
+    this.httpSession = httpSession;
   }
 
   public User createUser(String login, String password) {
@@ -35,22 +41,23 @@ public class UserService implements CommonService<User, Long> {
 
   @Override
   public User saveOrUpdate(User user) {
-    if(user.getId() != null) {
-      User byLogin = userRepository.getByLogin(user.getLogin());
-      if(!user.getId().equals(byLogin.getId())) {
-        throw new UserException("Login already exists!" + byLogin.getLogin());
-      }
-    }
-    User saved = userRepository.saveAndFlush(user);
+    User saved = userRepository.save(user);
+    httpSession.setAttribute("user", saved);
     return saved;
+  }
+
+  public User getUserFromSession(){
+    return (User) httpSession.getAttribute("user");
   }
 
   @Override
   public User getById(Long id) {
-    return userRepository.getOne(id);
+    Optional<User> byId = userRepository.findById(id);
+    return byId.get();
   }
 
   @Override
+  @Transactional
   public List<User> getAll() {
     return userRepository.findAll();
   }

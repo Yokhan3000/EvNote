@@ -55,7 +55,7 @@ public class InitDB {
     notepadRepository.saveAndFlush(notepad);
 
     Note note = new Note();
-    note.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
+    note.setCreationTime(LocalDate.now());
     note.setNotepad(notepad);
     note.setTitle("Work");
     noteRepository.saveAndFlush(note);

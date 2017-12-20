@@ -1,7 +1,10 @@
 package com.epam.evnote.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -30,15 +33,20 @@ public class Note implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY, targetEntity = Notepad.class)
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = Notepad.class)
   @JoinColumn(name = "notepad_id", nullable = false)
   private Notepad notepad;
 
   private String title;
   private String noteBody;
-  private Timestamp creationTime;
-  private Timestamp updateTime;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+  private LocalDate creationTime;
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+  private LocalDate updateTime;
+
+  @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(
