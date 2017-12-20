@@ -5,6 +5,7 @@ import com.epam.evnote.domain.User;
 import com.epam.evnote.repository.MarkRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,8 @@ public class MarkService implements CommonService<Mark, Long> {
 
   @Override
   public Mark getById(Long id) {
-    return markRepository.getOne(id);
+    Optional<Mark> byId = markRepository.findById(id);
+    return byId.get();
   }
 
   @Override

@@ -86,7 +86,7 @@ public class NoteServiceTest {
     Note note = new Note();
     note.setTitle("testNote");
     note.setNotepad(testNotepad);
-    note.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
+    note.setCreationTime(LocalDate.now());
     note.setNoteBody("Some body here");
 
     noteService.saveOrUpdate(note);
@@ -102,7 +102,7 @@ public class NoteServiceTest {
     Note note = new Note();
     note.setTitle("testNote");
     note.setNotepad(testNotepad);
-    note.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
+    note.setCreationTime(LocalDate.now());
     note.setNoteBody("Some body here");
 
     noteService.saveOrUpdate(note);
@@ -123,7 +123,7 @@ public class NoteServiceTest {
     Note note = new Note();
     note.setTitle("testNote");
     note.setNotepad(testNotepad);
-    note.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
+    note.setCreationTime(LocalDate.now());
     note.setNoteBody("Some body here");
 
     noteService.saveOrUpdate(note);

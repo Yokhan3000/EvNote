@@ -1,5 +1,7 @@
 package com.epam.evnote.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,10 @@ import lombok.ToString;
 @Data
 @Entity
 @Table
-@ToString(exclude = {"notepads"})
+@ToString(exclude = "notepads")
+//@JsonIgnoreProperties(value = "notepads")
 public class User implements Serializable {
+
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +32,11 @@ public class User implements Serializable {
 
   private String login;
   private String password;
-
+  @JsonIgnore
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
       cascade = CascadeType.ALL)
   private List<Notepad> notepads = new ArrayList<>();
-
+  @JsonIgnore
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
   private List<Mark> marks = new ArrayList<>();
 }

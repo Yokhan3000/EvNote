@@ -3,10 +3,12 @@ package com.epam.evnote.service.impl;
 import com.epam.evnote.domain.Mark;
 import com.epam.evnote.domain.Note;
 import com.epam.evnote.domain.Notepad;
+import com.epam.evnote.domain.User;
 import com.epam.evnote.repository.MarkRepository;
 import com.epam.evnote.repository.NoteRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,8 @@ public class NoteService implements CommonService<Note, Long> {
 
   @Override
   public Note getById(Long id) {
-    return noteRepository.getOne(id);
+    Optional<Note> byId = noteRepository.findById(id);
+    return byId.get();
   }
 
   @Override

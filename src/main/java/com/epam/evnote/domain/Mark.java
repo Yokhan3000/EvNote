@@ -30,7 +30,7 @@ public class Mark implements Serializable {
 
   private String name;
 
-  @ManyToMany(fetch = FetchType.LAZY)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(
           name = "mark_id",
@@ -40,7 +40,7 @@ public class Mark implements Serializable {
           referencedColumnName = "id"))
   private List<Note> notes = new ArrayList<>();
 
-  @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = User.class)
   @JoinColumn(name = "user_id")
   private User user;
 }

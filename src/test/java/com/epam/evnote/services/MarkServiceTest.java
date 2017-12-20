@@ -3,6 +3,7 @@ package com.epam.evnote.services;
 import static org.junit.Assert.*;
 
 import com.epam.evnote.config.ApplicationConfiguration;
+import com.epam.evnote.config.WebConfig;
 import com.epam.evnote.domain.Mark;
 import com.epam.evnote.service.impl.MarkService;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -22,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfiguration.class)
 @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
+@WebAppConfiguration
 public class MarkServiceTest {
 
   @Autowired

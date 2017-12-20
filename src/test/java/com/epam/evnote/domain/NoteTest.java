@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import com.epam.evnote.config.ApplicationConfiguration;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.extern.java.Log;
 import org.junit.Assert;
@@ -31,7 +32,7 @@ public class NoteTest {
     test = new Note();
     test.setId(100L);
     test.setNoteBody("body");
-    test.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
+    test.setCreationTime(LocalDate.now());
     test.setNotepad(new Notepad());
     test.setTitle("title");
   }
@@ -40,7 +41,7 @@ public class NoteTest {
     Note note = new Note();
     note.setId(100L);
     note.setNoteBody("body");
-    note.setCreationTime(Timestamp.valueOf(LocalDateTime.now()));
+    note.setCreationTime(LocalDate.now());
     note.setNotepad(new Notepad());
     note.setTitle("title");
     Note note1 = new Note();
