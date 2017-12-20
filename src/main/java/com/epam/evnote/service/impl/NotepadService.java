@@ -7,6 +7,7 @@ import com.epam.evnote.service.CommonService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,10 +17,13 @@ import org.springframework.stereotype.Service;
 public class NotepadService implements CommonService<Notepad, Long> {
 
   NotepadRepository notepadRepository;
+  UserDetailsService userDetailsService;
 
   @Autowired
-  public NotepadService(NotepadRepository notepadRepository) {
+  public NotepadService(NotepadRepository notepadRepository,
+      UserDetailsService userDetailsService) {
     this.notepadRepository = notepadRepository;
+    this.userDetailsService = userDetailsService;
   }
 
   public void createNotepad(String title, User user) {
@@ -46,6 +50,8 @@ public class NotepadService implements CommonService<Notepad, Long> {
   public List<Notepad> getAll() {
     return notepadRepository.findAll();
   }
+
+
 
   @Override
   public void delete(Notepad notepad) {
