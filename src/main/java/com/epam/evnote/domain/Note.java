@@ -29,6 +29,7 @@ import lombok.ToString;
 @Table
 public class Note implements Serializable {
 
+  @JsonIgnore
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;

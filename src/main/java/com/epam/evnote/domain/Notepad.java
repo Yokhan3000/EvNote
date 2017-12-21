@@ -32,6 +32,7 @@ import lombok.ToString;
 @ToString(exclude = "notes")
 public class Notepad implements Serializable {
 
+
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;

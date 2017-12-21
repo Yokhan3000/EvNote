@@ -1,5 +1,6 @@
 package com.epam.evnote.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,14 @@ import lombok.ToString;
 @Table
 public class Mark implements Serializable {
 
+  @JsonIgnore
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
   private String name;
 
-
+  @JsonIgnore
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(

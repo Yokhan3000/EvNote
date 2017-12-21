@@ -51,9 +51,11 @@ public class NoteController {
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(value = "/notes")
-  public void createNote(@RequestBody Note note, @RequestParam Long id) {
+  public void createOrUpdateNote(@RequestBody Note note, @RequestParam Long id) {
     Notepad notepad = notepadService.getById(id);
-    note.setNotepad(notepad);
+    if (note.getNotepad() == null) {
+      note.setNotepad(notepad);
+    }
     noteService.saveOrUpdate(note);
   }
 
@@ -70,10 +72,9 @@ public class NoteController {
     return byName.getNotes();
   }
 
-  @Transactional
   @ResponseStatus(HttpStatus.OK)
   @PostMapping(value = "/mark/note")
-    public void addMarkToNote(@RequestParam Long markId,
+  public void addMarkToNote(@RequestParam Long markId,
       @RequestParam Long noteId) {
     Mark mark = markService.getById(markId);
     Note note = noteService.getById(noteId);
@@ -83,5 +84,16 @@ public class NoteController {
     noteService.saveOrUpdate(note);
   }
 
+  @ResponseStatus(HttpStatus.OK)
+  @PostMapping(value = "/mark/note")
+  public void deleteMarkFromNote(@RequestParam Long markId,
+      @RequestParam Long noteId) {
+    Mark mark = markService.getById(markId);
+    Note note = noteService.getById(noteId);
+    mark.getNotes().remove(note);
+    note.getMarks().remove(mark);
+    markService.saveOrUpdate(mark);
+    noteService.saveOrUpdate(note);
+  }
 
 }

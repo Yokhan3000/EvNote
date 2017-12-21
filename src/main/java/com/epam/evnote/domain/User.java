@@ -26,6 +26,7 @@ import lombok.ToString;
 public class User implements Serializable {
 
 
+  @JsonIgnore
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
