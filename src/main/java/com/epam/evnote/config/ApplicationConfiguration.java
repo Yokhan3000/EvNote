@@ -26,7 +26,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan("com.epam.evnote")
+@ComponentScan("com.epam.evnote.repository")
 @EnableJpaRepositories("com.epam.evnote.repository")
 @ImportResource("classpath:contex.xml")
 public class ApplicationConfiguration {

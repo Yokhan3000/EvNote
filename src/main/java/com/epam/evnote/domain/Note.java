@@ -30,7 +30,7 @@ import lombok.ToString;
 public class Note implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Notepad.class)
@@ -50,8 +50,8 @@ public class Note implements Serializable {
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(
-          name = "note_id", referencedColumnName = "id"),
+          name = "markId", referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(
-          name = "mark_id", referencedColumnName = "id"))
+          name = "noteId", referencedColumnName = "id"))
   private List<Mark> marks = new ArrayList<>();
 }
