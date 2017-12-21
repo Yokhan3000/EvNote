@@ -4,6 +4,7 @@ import com.epam.evnote.domain.User;
 import com.epam.evnote.exceptions.UserException;
 import com.epam.evnote.service.impl.UserService;
 import java.util.List;
+import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
