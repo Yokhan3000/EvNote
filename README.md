@@ -13,4 +13,3 @@
 | /mark/note                               | POST,DELETE     | Add,Delete mark to note                             |
 | /marks                                   | GET,POST        | Get all marks by user. Create,update                |
 | /marks/{id}                              | DELETE          | Get all marks by user. Create,update                |
-|------------------------------------------|-----------------|-----------------------------------------------------|
