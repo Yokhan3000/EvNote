@@ -21,13 +21,13 @@ import lombok.ToString;
 @Data
 @Entity
 @Table
-@ToString(exclude = "notepads")
+@ToString(exclude = {"notepads", "marks"})
 //@JsonIgnoreProperties(value = "notepads")
 public class User implements Serializable {
 
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
   private String login;

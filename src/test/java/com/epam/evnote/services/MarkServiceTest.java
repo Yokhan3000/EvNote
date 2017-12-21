@@ -65,7 +65,7 @@ public class MarkServiceTest {
     mark.setName("Most Important");
     markService.saveOrUpdate(mark);
     Mark most_important = markService.getByName("Most Important");
-    markService.delete(most_important);
+    markService.delete(most_important.getId());
     assertNull(markService.getByName("Most Important"));
   }
 

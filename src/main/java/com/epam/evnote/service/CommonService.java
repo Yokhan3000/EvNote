@@ -16,5 +16,5 @@ public interface CommonService<E, I> {
 
   List<E> getAll();
 
-  void delete(E e);
+  void delete(I i);
 }
