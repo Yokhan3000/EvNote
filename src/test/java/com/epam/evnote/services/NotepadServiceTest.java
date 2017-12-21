@@ -95,7 +95,7 @@ public class NotepadServiceTest {
     notepad.setUpdateTime(LocalDate.now());
     notepad.setUser(user);
     notepadService.saveOrUpdate(notepad);
-    notepadService.delete(notepad);
+    notepadService.delete(notepad.getId());
     Notepad home = notepadService.getByTitle("Home",user);
     assertNull(home);
   }

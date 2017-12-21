@@ -59,8 +59,8 @@ public class NotepadService implements CommonService<Notepad, Long> {
 
 
   @Override
-  public void delete(Notepad notepad) {
-    notepadRepository.delete(notepad);
+  public void delete(Long id) {
+    notepadRepository.deleteById(id);
   }
 
   public Notepad getByTitle(String title, User user) {

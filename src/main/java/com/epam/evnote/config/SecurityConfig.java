@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic();
         http.authorizeRequests().antMatchers("/console/**").permitAll();
         http.authorizeRequests().antMatchers("/users").permitAll();
-        http.authorizeRequests().antMatchers("/swagger-ui.html/**").permitAll();
         http.headers().frameOptions().disable();
         http.authorizeRequests()
 //                .antMatchers("/notepads/**").access("hasRole('ROLE_USER')")

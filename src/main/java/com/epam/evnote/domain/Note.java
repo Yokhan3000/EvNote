@@ -33,6 +33,7 @@ public class Note implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.EAGER, targetEntity = Notepad.class)
   @JoinColumn(name = "notepad_id", nullable = false)
   private Notepad notepad;

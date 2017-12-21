@@ -1,6 +1,7 @@
 package com.epam.evnote.config;
 
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -26,13 +27,14 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan("com.epam.evnote.repository")
+@ComponentScan("com.epam.evnote")
 @EnableJpaRepositories("com.epam.evnote.repository")
 @ImportResource("classpath:contex.xml")
 public class ApplicationConfiguration {
 
   @Value("classpath:import.sql")
   private Resource dataScript;
+
   @Bean
   public DataSource dataSource() throws SQLException {
     EmbeddedDatabase dataSource = new EmbeddedDatabaseBuilder().setName("test")
@@ -56,6 +58,7 @@ public class ApplicationConfiguration {
     bean.setDataSource(dataSource);
     bean.setJpaVendorAdapter(jpaVendorAdapter);
     bean.setPackagesToScan("com.epam.evnote");
+    bean.setJpaProperties(getHibernateProperties());
     return bean;
   }
 
@@ -65,7 +68,7 @@ public class ApplicationConfiguration {
   }
 
   @Bean
-  public DataSourceInitializer dataSourceInitializer() throws Exception{
+  public DataSourceInitializer dataSourceInitializer() throws Exception {
     DataSourceInitializer initializer = new DataSourceInitializer();
     initializer.setDataSource(dataSource());
 
@@ -75,6 +78,12 @@ public class ApplicationConfiguration {
     initializer.setDatabasePopulator(databasePopulator);
     return initializer;
 
+  }
+
+  private Properties getHibernateProperties() {
+    Properties properties = new Properties();
+    properties.put("hibernate.enable_lazy_load_no_trans", true);
+    return properties;
   }
 
 }

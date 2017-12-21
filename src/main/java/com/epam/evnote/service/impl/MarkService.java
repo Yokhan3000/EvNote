@@ -41,8 +41,8 @@ public class MarkService implements CommonService<Mark, Long> {
   }
 
   @Override
-  public void delete(Mark mark) {
-    markRepository.delete(mark);
+  public void delete(Long id) {
+    markRepository.deleteById(id);
   }
 
   public Mark getByName(String name) {

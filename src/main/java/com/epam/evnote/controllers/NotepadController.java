@@ -69,9 +69,7 @@ public class NotepadController {
   @ResponseStatus(HttpStatus.OK)
   @DeleteMapping(value = "notepad/{id}")
   public void deleteNotepadById(@PathVariable("id") Long id, HttpServletResponse httpResponse) {
-    Notepad byId = notepadService.getById(id);
-    System.err.println(byId);
-    notepadService.delete(byId);
+    notepadService.delete(id);
     httpResponse.setHeader("Location", "/notepads");
   }
 
