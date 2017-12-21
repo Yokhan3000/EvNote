@@ -11,7 +11,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy(proxyTargetClass=true)
-@ComponentScan(basePackages="com.epam.evnote.service")
+@ComponentScan(basePackages="com.epam.evnote")
 public class MonitorConfig {
 
 }

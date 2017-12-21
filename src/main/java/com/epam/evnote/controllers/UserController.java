@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
  * @author Mikhail Chtetsov on 12/12/2017.
  */
 @RestController
-@SessionAttributes("user")
 public class UserController {
 
   private UserService userService;
@@ -36,7 +35,7 @@ public class UserController {
   }
 
   @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping
+  @PostMapping(value = "/create")
   public User createPerson(@RequestBody User user,
       HttpServletResponse response) {
     User saved = userService.saveOrUpdate(user);
@@ -51,12 +50,11 @@ public class UserController {
   }
 
   @RequestMapping("/info")
-  public @ResponseBody
-  String userInfo(Authentication authentication) {
+  public String userInfo(Authentication authentication) {
     String msg = "";
     for (GrantedAuthority authority : authentication.getAuthorities()) {
       String role = authority.getAuthority();
-      msg+=authentication.getName()+", You have "+ role;
+      msg += authentication.getName() + ", You have " + role;
     }
     return msg;
   }
