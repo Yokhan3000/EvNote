@@ -37,6 +37,7 @@ public class UserServiceTest {
     User mike = userService.createUser("Mike", "321");
     assertNotNull(mike);
   }
+
   @Transactional
   @Test
   public void saveOrUpdate() throws Exception {
@@ -66,7 +67,7 @@ public class UserServiceTest {
   @Test
   public void delete() throws Exception {
     User user = userService.createUser("John", "111");
-    userService.delete(user);
+    userService.delete(user.getId());
     User john = userService.createUser("John", "222");
     assertNotNull(john);
   }

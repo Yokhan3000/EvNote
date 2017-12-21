@@ -63,8 +63,8 @@ public class UserService implements CommonService<User, Long> {
   }
 
   @Override
-  public void delete(User user) {
-    userRepository.delete(user);
+  public void delete(Long id) {
+    userRepository.deleteById(id);
   }
 
   public User getByLogin(String login) {

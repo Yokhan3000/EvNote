@@ -36,11 +36,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.httpBasic();
+        http.authorizeRequests().antMatchers("/console/**").permitAll();
+        http.authorizeRequests().antMatchers("/users").permitAll();
+        http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers("/notepads/**").access("hasRole('ROLE_USER')")
+//                .antMatchers("/notepads/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/info/**").access("hasRole('ROLE_USER')")
                 //.antMatchers("/confidential/**").access("hasRole('ROLE_SUPERADMIN')")
                 .and().formLogin().defaultSuccessUrl("/", false);
+
+        http.logout().logoutUrl("/logout");
+        http.logout().logoutSuccessUrl("/");
+        http.logout()
+            .clearAuthentication(true)
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID");
+
     }
 
     @Bean

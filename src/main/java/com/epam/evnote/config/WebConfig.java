@@ -15,11 +15,10 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.epam.evnote")
-@Import({ SecurityConfig.class })
+//@Import({ SecurityConfig.class })
 public class WebConfig implements WebMvcConfigurer {
 
 
-  @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/WEB-INF/pages/**").addResourceLocations("/pages/");
 

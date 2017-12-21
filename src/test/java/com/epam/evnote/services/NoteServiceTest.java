@@ -131,7 +131,7 @@ public class NoteServiceTest {
     Note testNote = noteService.getByTitle(testNotepad,"testNote");
     assertEquals(testNote.getNoteBody(), "Some body here");
 
-    noteService.delete(testNote);
+    noteService.delete(testNote.getId());
     Note deletedNote = noteService.getByTitle(testNotepad,"testNote");
     assertNull(deletedNote);
   }

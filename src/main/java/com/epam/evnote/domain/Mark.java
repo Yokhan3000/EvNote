@@ -25,18 +25,19 @@ import lombok.ToString;
 public class Mark implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   private Long id;
 
   private String name;
 
+
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "notes_marks",
       joinColumns = @JoinColumn(
-          name = "mark_id",
+          name = "noteId",
           referencedColumnName = "id"),
       inverseJoinColumns = @JoinColumn(
-          name = "note_id",
+          name = "markId",
           referencedColumnName = "id"))
   private List<Note> notes = new ArrayList<>();
 
