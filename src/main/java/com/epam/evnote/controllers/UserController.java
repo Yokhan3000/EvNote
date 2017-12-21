@@ -49,7 +49,7 @@ public class UserController {
     return userService.getById(id);
   }
 
-  @RequestMapping("/info")
+  @RequestMapping("/login")
   public String userInfo(Authentication authentication) {
     String msg = "";
     for (GrantedAuthority authority : authentication.getAuthorities()) {
