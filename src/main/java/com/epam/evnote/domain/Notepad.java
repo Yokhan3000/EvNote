@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -44,6 +45,6 @@ public class Notepad implements Serializable {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
   private LocalDate updateTime;
   @JsonIgnore
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "notepad")
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "notepad", cascade = CascadeType.ALL)
   private List<Note> notes = new ArrayList<>();
 }
