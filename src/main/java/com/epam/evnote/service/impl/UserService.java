@@ -20,15 +20,12 @@ public class UserService implements CommonService<User, Long> {
 
   UserRepository userRepository;
 
-  HttpSession httpSession;
-
   @Autowired
-  public UserService(UserRepository userRepository, HttpSession httpSession) {
+  public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
-    this.httpSession = httpSession;
   }
 
-  public User createUser(String login, String password) {
+  public User createUser(String login, String password) throws UserException {
     User byLogin = userRepository.getByLogin(login);
     if (byLogin != null) {
       throw new UserException("Login already exists!" + byLogin.getLogin());
@@ -43,13 +40,9 @@ public class UserService implements CommonService<User, Long> {
   @Override
   public User saveOrUpdate(User user) {
     User saved = userRepository.save(user);
-    httpSession.setAttribute("user", saved);
     return saved;
   }
 
-  public User getUserFromSession(){
-    return (User) httpSession.getAttribute("user");
-  }
 
   @Override
   public User getById(Long id) {

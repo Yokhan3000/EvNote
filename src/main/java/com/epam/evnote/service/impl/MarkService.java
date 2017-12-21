@@ -29,6 +29,7 @@ public class MarkService implements CommonService<Mark, Long> {
     return saved;
   }
 
+
   @Override
   public Mark getById(Long id) {
     Optional<Mark> byId = markRepository.findById(id);
