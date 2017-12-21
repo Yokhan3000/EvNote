@@ -27,6 +27,7 @@ import lombok.ToString;
 @Data
 @Entity
 @Table
+@ToString(exclude = "marks")
 public class Note implements Serializable {
 
   @JsonIgnore

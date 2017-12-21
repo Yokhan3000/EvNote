@@ -22,6 +22,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -30,7 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfiguration.class)
-@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
+@WebAppConfiguration
 public class NotepadServiceTest {
 
 

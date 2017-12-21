@@ -35,7 +35,7 @@ public class UserController {
   }
 
   @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping(value = "/users")
+  @PostMapping(value = "/create")
   public User createPerson(@RequestBody User user,
       HttpServletResponse response) {
     User saved = userService.saveOrUpdate(user);

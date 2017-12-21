@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationConfiguration.class)
-@DirtiesContext(classMode = ClassMode.AFTER_CLASS)
 @WebAppConfiguration
 public class MarkServiceTest {
 
