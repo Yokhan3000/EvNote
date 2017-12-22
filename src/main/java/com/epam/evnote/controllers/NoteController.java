@@ -85,7 +85,7 @@ public class NoteController {
   }
 
   @ResponseStatus(HttpStatus.OK)
-  @PostMapping(value = "/note/mark")
+  @DeleteMapping(value = "/mark/note")
   public void deleteMarkFromNote(@RequestParam Long markId,
       @RequestParam Long noteId) {
     Mark mark = markService.getById(markId);

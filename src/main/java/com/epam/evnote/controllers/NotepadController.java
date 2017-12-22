@@ -4,7 +4,6 @@ import com.epam.evnote.domain.Notepad;
 import com.epam.evnote.domain.User;
 import com.epam.evnote.service.impl.NotepadService;
 import com.epam.evnote.service.impl.UserService;
-import com.sun.deploy.net.HttpResponse;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
