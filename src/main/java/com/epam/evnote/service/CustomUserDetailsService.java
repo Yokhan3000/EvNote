@@ -2,6 +2,8 @@ package com.epam.evnote.service;
 
 import com.epam.evnote.domain.User;
 import com.epam.evnote.service.impl.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,24 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
+    private static final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
     @Autowired
     UserService userService;
 
     @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String ssoId)
+    public UserDetails loadUserByUsername(String login)
             throws UsernameNotFoundException {
-        System.out.println("Try to get user with user id: " + ssoId);
-        User user = userService.getByLogin(ssoId);
+        log.info("Try to get user with user login " + login);
+        User user = userService.getByLogin(login);
         if(user==null){
-            System.out.println("User not found " + ssoId);
+            log.info("User not found " + login);
             throw new UsernameNotFoundException("Username not found");
         }
 
-        // Список прав доступа
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 

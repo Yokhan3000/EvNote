@@ -5,6 +5,7 @@ import com.epam.evnote.exceptions.UserException;
 import com.epam.evnote.repository.UserRepository;
 import com.epam.evnote.service.CommonService;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class UserService implements CommonService<User, Long> {
     userRepository.deleteById(id);
   }
 
-  public User getByLogin(String login) {
+  public User getByLogin(String login) throws NoSuchElementException {
     return userRepository.getByLogin(login);
   }
 
