@@ -66,6 +66,11 @@ public class InitDB {
     mark.getNotes().add(note);
     markRepository.saveAndFlush(mark);
 
+//    Mark mark1 = new Mark();
+//    mark.setName("Zhraka");
+//    mark.getNotes().add(note);
+//    markRepository.saveAndFlush(mark1);
+
 //    while(true){}
   }
 }

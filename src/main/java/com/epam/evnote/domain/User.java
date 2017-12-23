@@ -32,6 +32,7 @@ public class User implements Serializable {
   private Long id;
 
   private String login;
+  @JsonIgnore
   private String password;
   @JsonIgnore
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
