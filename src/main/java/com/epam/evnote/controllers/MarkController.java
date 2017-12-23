@@ -49,7 +49,7 @@ public class MarkController {
   }
 
   @ResponseStatus(HttpStatus.OK)
-  @DeleteMapping(value = "/marks{id}")
+  @DeleteMapping(value = "/marks/{id}")
   public void deleteMark(@PathVariable("id") Long id) {
     markService.delete(id);
   }
