@@ -1,5 +1,10 @@
 # Evnote
 
+Spring MVC, Security, AOP, Swagger, Jacoco
+
+login: Misha
+password: 123 
+
 | URL Path                                 | Request methods | Result                                              |
 |------------------------------------------|-----------------|-----------------------------------------------------|
 | /create                                  | POST            | Create, update user                                 |
